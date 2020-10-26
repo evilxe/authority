@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzw.authority.dao.systems.RoleMenuDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.fzw.authority.entity.systems.RoleMenuEntity">
+        <id column="id" property="id" />
+        <result column="role_id" property="roleId" />
+        <result column="menu_id" property="menuId" />
+        <result column="creator_id" property="creatorId" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, role_id, menu_id, creator_id, create_time
+    </sql>
+
+    <delete id="deleteByRoleId" parameterType="string">
+        DELETE FROM
+            role_menu
+        WHERE role_id = #{roleId}
+    </delete>
+
+    <insert id="batchInner" parameterType="list">
+        INSERT INTO role_menu (
+            id,
+            role_id,
+            meun_id,
+            creator_id,
+            create_time
+        ) VALUES
+        <foreach collection = "list" item="item" index="index" separator=",">
+        (
+            #{item.id},
+            #{item.roleId},
+            #{item.menuId},
+            #{item.creatorId},
+            #{item.createTime}
+        )
+        </foreach>
+    </insert>
+</mapper>

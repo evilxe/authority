@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzw.authority.dao.systems.RoleDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.fzw.authority.entity.systems.RoleEntity">
+        <id column="id" property="id" />
+        <result column="role_name" property="roleName" />
+        <result column="remark" property="remark" />
+        <result column="role_status" property="roleStatus" />
+        <result column="creator_id" property="creatorId" />
+        <result column="create_time" property="createTime" />
+        <result column="modifier_id" property="modifierId" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, role_name, remark, role_status, creator_id, create_time, modifier_id, modify_time
+    </sql>
+
+    <select id="selectByUserId" parameterType="String" resultMap="BaseResultMap">
+        SELECT
+            a.id,
+            a.role_name,
+            a.remark,
+            a.role_status,
+            a.creator_id,
+            a.create_time,
+            a.modifier_id,
+            a.modify_time
+        FROM
+            role a
+            INNER JOIN user_role b ON a.id = b.role_id
+        WHERE
+            b.user_id = #{userId}
+    </select>
+</mapper>

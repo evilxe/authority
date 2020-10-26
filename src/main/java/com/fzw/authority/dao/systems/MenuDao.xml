@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzw.authority.dao.systems.MenuDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.fzw.authority.entity.systems.MenuEntity">
+        <id column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="menu_name" property="menuName" />
+        <result column="menu_url" property="menuUrl" />
+        <result column="perms" property="perms" />
+        <result column="menu_type" property="menuType" />
+        <result column="order_num" property="orderNum" />
+        <result column="component" property="component" />
+        <result column="menu_status" property="menuStatus" />
+        <result column="creator_id" property="creatorId" />
+        <result column="create_time" property="createTime" />
+        <result column="modifier_id" property="modifierId" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, parent_id, menu_name, menu_url, perms, menu_type, order_num, component, menu_status, creator_id, create_time, modifier_id, modify_time
+    </sql>
+
+    <select id="selectByRoleId" parameterType="String" resultMap="BaseResultMap">
+        SELECT
+            a.id,
+            a.parent_id,
+            a.menu_name,
+            a.menu_url,
+            a.perms,
+            a.menu_type,
+            a.order_num,
+            a.component,
+            a.menu_status,
+            a.creator_id,
+            a.create_time,
+            a.modifier_id,
+            a.modify_time
+        FROM
+            menu a
+        INNER JOIN role_menu b ON a.id = b.meun_id
+        WHERE
+            b.role_id = #{roleId}
+
+    </select>
+
+    <select id="selectMenuByIdList" parameterType="list" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM menu
+        WHERE id in (
+        <foreach collection="list" index="index" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </select>
+</mapper>

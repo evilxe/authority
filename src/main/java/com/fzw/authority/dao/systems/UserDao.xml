@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzw.authority.dao.systems.UserDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.fzw.authority.entity.systems.UserEntity">
+        <id column="id" property="id" />
+        <result column="account" property="account" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="real_name" property="realName" />
+        <result column="mobile" property="mobile" />
+        <result column="email" property="email" />
+        <result column="status" property="status" />
+        <result column="last_login_date" property="lastLoginDate" />
+        <result column="creator_id" property="creatorId" />
+        <result column="create_time" property="createTime" />
+        <result column="modifier_id" property="modifierId" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, account, password, salt, real_name, mobile, email, status, last_login_date, creator_id, create_time, modifier_id, modify_time
+    </sql>
+
+</mapper>
