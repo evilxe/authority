@@ -44,7 +44,7 @@
         INNER JOIN role_menu b ON a.id = b.meun_id
         WHERE
             b.role_id = #{roleId}
-
+        and a.menu_type != 'CATALOGUE'
     </select>
 
     <select id="selectMenuByIdList" parameterType="list" resultMap="BaseResultMap">

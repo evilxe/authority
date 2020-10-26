@@ -81,6 +81,7 @@ public class UserController {
             UserEntity userEntity = ShiRoUserUtil.getUser();
             return BaseResult.done(userEntity.getAccount());
         } catch (Exception e){
+            e.printStackTrace();
             return BaseResult.error(BaseResultStatus.ERROR);
         }
     }

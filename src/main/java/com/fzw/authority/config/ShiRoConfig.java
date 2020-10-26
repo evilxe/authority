@@ -46,6 +46,9 @@ public class ShiRoConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/back/notPermit");
 
         //自定义拦截器
+//         Map<String, Filter> filterMap = new LinkedHashMap<>();
+//        filterMap.put("roleOrFilter", new CustomShiRoFilter());
+//        shiroFilterFactoryBean.setFilters(filterMap);
 
 
         // 设置拦截器地址 LinkedHashMao 有序，无序回造成拦截顺序错乱给
@@ -58,6 +61,7 @@ public class ShiRoConfig {
         filterChainDefinitionMap.put("/back/logIn","anon");
 
         filterChainDefinitionMap.put("/back/**", "authc");
+//        filterChainDefinitionMap.put("/**", "authc, roleOrFilter");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
